@@ -1,13 +1,8 @@
 #include <Windows.h>
 #include <d3d12.h>
-#include <dxgi1_6.h>
 #include <iostream>
 
 #include <wrl.h>
-
-#pragma comment(lib, "d3d12.lib")
-#pragma comment(lib, "dxgi.lib")
-#pragma comment(lib, "dxguid.lib")
 
 using namespace Microsoft;
 using namespace Microsoft::WRL;
@@ -51,7 +46,7 @@ void DX12Engine::RenderLoop()
 {
     bool bShouldExit = false;
     MSG Message = {};
-
+    
     while (!bShouldExit)
     {
         while (PeekMessage(&Message, nullptr, 0, 0, PM_REMOVE))
@@ -64,6 +59,7 @@ void DX12Engine::RenderLoop()
             else
             {
                 bShouldExit = true;
+                break;
             }
         }
     }
@@ -71,12 +67,13 @@ void DX12Engine::RenderLoop()
 
 LRESULT DX12Engine::CallBackFunc(HWND Hwnd, UINT Message, WPARAM WParam, LPARAM LParam)
 {
-    switch(Message)
+    if (Message == WM_DESTROY)
     {
-    case WM_DESTROY:
         PostQuitMessage(0);
-        break;
-    default: return DefWindowProc(Hwnd, Message, WParam, LParam);
+    }
+    else
+    {
+        return DefWindowProc(Hwnd, Message, WParam, LParam);
     }
     return 0;
 }
