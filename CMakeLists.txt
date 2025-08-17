@@ -22,11 +22,13 @@ set(DXLIB
     d3d12.lib
     dxgi.lib
     dxguid.lib
+    d3dcompiler.lib
 )
 
 set(DEMO_NAME
     001-InitWindow
     002-BetterWindow
+    003-Rect
 )
 
 foreach(CURRENT_NAME ${DEMO_NAME})
