@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 project(DX12_Tutorial)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 set(SUBSYSTEM_TYPE WINDOWS)
 
@@ -23,12 +23,14 @@ set(DXLIB
     dxgi.lib
     dxguid.lib
     d3dcompiler.lib
+    windowscodecs.lib
 )
 
 set(DEMO_NAME
     001-InitWindow
     002-BetterWindow
     003-Rect
+    004-Texture
 )
 
 foreach(CURRENT_NAME ${DEMO_NAME})
