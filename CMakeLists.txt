@@ -31,6 +31,7 @@ set(DEMO_NAME
     002-BetterWindow
     003-Rect
     004-Texture
+    005-Cube
 )
 
 foreach(CURRENT_NAME ${DEMO_NAME})
