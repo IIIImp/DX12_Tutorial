@@ -36,8 +36,18 @@ set(DEMO_NAME
 )
 
 foreach(CURRENT_NAME ${DEMO_NAME})
-    add_executable(${CURRENT_NAME} ${CURRENT_NAME}.cpp)
+    # Add all compilable resource
+    file(GLOB ${CURRENT_NAME}_SOURCES
+        "${CURRENT_NAME}/*.cpp"
+        "${CURRENT_NAME}/*.h"
+        "${CURRENT_NAME}/*.hpp"
+    )
+    
+    add_executable(${CURRENT_NAME} ${${CURRENT_NAME}_SOURCES})
+    
     add_definitions(-DUNICODE -D_UNICODE)
+    
+    target_include_directories(${CURRENT_NAME} PRIVATE ${CURRENT_NAME})
     
     set_target_properties(${CURRENT_NAME} PROPERTIES
         LINK_FLAGS "/SUBSYSTEM:${SUBSYSTEM_TYPE} /ENTRY:WinMain"
@@ -48,4 +58,20 @@ foreach(CURRENT_NAME ${DEMO_NAME})
     ${DEBUGLIB}
     ${DXLIB}
         )
+        
+    set(RESOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${CURRENT_NAME}/Resources")
+    if(EXISTS ${RESOURCE_DIR})
+        add_custom_command(TARGET ${CURRENT_NAME} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${RESOURCE_DIR}"
+            "$<TARGET_FILE_DIR:${CURRENT_NAME}>"
+            COMMENT "Copying resources for ${CURRENT_NAME}"
+        )
+        add_custom_command(TARGET ${CURRENT_NAME} POST_BUILD
+              COMMAND ${CMAKE_COMMAND} -E copy_directory
+              "${RESOURCE_DIR}"
+              "${CMAKE_BINARY_DIR}/"
+              COMMENT "Copying resources for ${CURRENT_NAME}"
+        )
+    endif()
 endforeach()
