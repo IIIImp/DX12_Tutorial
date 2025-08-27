@@ -713,13 +713,13 @@ void DX12Engine::CreatePSO()
     ComPtr<ID3DBlob> VertexShaderBlob;
     ComPtr<ID3DBlob> PixelShaderBlob;
     ComPtr<ID3DBlob> ErrorBlob;
-    D3DCompileFromFile(L"004-Shader.hlsl", nullptr, nullptr, "VSMain", "vs_5_1", 0, 0, &VertexShaderBlob, &ErrorBlob);
+    D3DCompileFromFile(L"005-Shader.hlsl", nullptr, nullptr, "VSMain", "vs_5_1", 0, 0, &VertexShaderBlob, &ErrorBlob);
     if (ErrorBlob)
     {
         OutputDebugStringA((const char*)ErrorBlob->GetBufferPointer());
         OutputDebugStringA("\n");
     }
-    D3DCompileFromFile(L"004-Shader.hlsl", nullptr, nullptr, "PSMain", "ps_5_1", 0, 0, &PixelShaderBlob, &ErrorBlob);
+    D3DCompileFromFile(L"005-Shader.hlsl", nullptr, nullptr, "PSMain", "ps_5_1", 0, 0, &PixelShaderBlob, &ErrorBlob);
     if (ErrorBlob)
     {
         OutputDebugStringA((const char*)ErrorBlob->GetBufferPointer());
@@ -846,7 +846,7 @@ void DX12Engine::UpdateConstantBuffer()
 {
 	ModelMatrix = XMMatrixRotationY(30.0f);
 	ViewMatrix = XMMatrixLookAtLH(EyePosition, FocusPosition, UpDirection);
-	ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV4, 40.0 / 3, 0.1, 1000);
+	ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV4, 4.0 / 3, 0.1, 1000);
 	XMStoreFloat4x4(&MVPBuffer->MVPMatrix, ModelMatrix * ViewMatrix * ProjectionMatrix);
 }
 
