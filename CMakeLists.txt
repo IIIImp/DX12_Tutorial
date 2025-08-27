@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 project(DX12_Tutorial)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 
 set(SUBSYSTEM_TYPE WINDOWS)
 
@@ -32,6 +32,7 @@ set(DEMO_NAME
     003-Rect
     004-Texture
     005-Cube
+    006-FP
 )
 
 foreach(CURRENT_NAME ${DEMO_NAME})
