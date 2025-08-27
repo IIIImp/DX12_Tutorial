@@ -33,6 +33,7 @@ set(DEMO_NAME
     004-Texture
     005-Cube
     006-FP
+    007-BasicRenderer
 )
 
 foreach(CURRENT_NAME ${DEMO_NAME})
